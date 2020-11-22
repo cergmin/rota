@@ -90,6 +90,10 @@
                 p2 = persons[persons_index % persons.length][1];
             }
 
+            if(d.getDate() == new Date().getDate()){
+                day_class += ' today';
+            }
+
             append_str += '<div class="card ' + day_class + '">';
             append_str += '<div class="card__day">';
             append_str += '<h1>' + d.getDate() + '</h1>';
