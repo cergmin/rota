@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <title>10Д | Расписание</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="timetable"></div>
+    </body>
+    <script>
+        function date_diff(d1, d2){
+            let diff = d1 - d2 + ((d2.getTimezoneOffset() - d1.getTimezoneOffset()) * 60 * 1000);
+            diff = Math.floor(diff / (1000 * 60 * 60 * 24));
+            
+            return diff;
+        }
+
+        let d = new Date();
+        let weekdays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+
+        let persons = [
+            ['Дергачёва Ульяна', ''],
+            ['Чуев Егор', 'Квачко Артём'],
+            ['Зяблицкая Дарья', 'Царёв Михаил'],
+            ['Ремпель Екатерина', 'Рогова Елизавета'],
+            ['Горбунов Егор', 'Герасимов Владислав'],
+            ['Сапинский Дмитрий', 'Чуев Артём'],
+            ['Милеева Алиса', 'Иванова Соня'],
+            ['Клещёва Антонина', 'Стародуб Любовь'],
+            ['Васильев Роман', 'Минеев Владислав'],
+            ['Миронов Антон', 'Вертелов Владислав'],
+            ['Минаков Сергей', 'Суздальцева Елизавета'],
+            ['Мележик Денис', 'Севрюк Даниил'],
+            ['Стенков Максим', 'Хайбриев Александр']
+        ]
+
+        let distant_days = [
+            // [24, 11, 2020]
+        ];
+        
+        d.setDate(d.getDate() - d.getDay() + 1);
+        let persons_index = date_diff(d, new Date(d.getFullYear(), 0, 0));
+
+        for(let j = 0; j < distant_days.length; j++){
+            let dist_d = new Date(
+                distant_days[j][2],
+                distant_days[j][1] - 1,
+                distant_days[j][0]
+            );
+
+            if(date_diff(d, dist_d) > 0){
+                persons_index++;
+            }
+        }
+        
+        $(".timetable").html("");
+
+        for(let i = 0; i < 7; i++){
+            let append_str = '', p1 = '', p2 = '', day_class = '';
+            let is_distant = false;
+            
+            for(let j = 0; j < distant_days.length; j++){
+                let dist_d = new Date(
+                    distant_days[j][2],
+                    distant_days[j][1] - 1,
+                    distant_days[j][0]
+                );
+
+                if(date_diff(d, dist_d) == 0){
+                    is_distant = true;
+                    persons_index--;
+                }
+            }
+
+            if(d.getDay() == 0 || d.getDay() == 6){
+                p1 = 'Выходной';
+                p2 = 'день';
+                day_class = 'weekend';
+            }
+            else if(is_distant){
+                p1 = 'Дистанционные';
+                p2 = 'занятия';
+                day_class = 'distant';
+            }
+            else{
+                p1 = persons[persons_index % persons.length][0];
+                p2 = persons[persons_index % persons.length][1];
+            }
+
+            append_str += '<div class="card ' + day_class + '">';
+            append_str += '<div class="card__day">';
+            append_str += '<h1>' + d.getDate() + '</h1>';
+            append_str += '<h2>' + weekdays[i] + '</h2>';
+            append_str += '</div>';
+            append_str += '<div class="card__persons">';
+            append_str += '<h1>' + p1 + '</h1>';
+            append_str += '<h1>' + p2 + '</h1>';
+            append_str += '</div>';
+            append_str += '</div>';
+
+            $(".timetable").append(append_str);
+            d.setDate(d.getDate() + 1);
+            persons_index++;
+        }
+    </script>
+</html>

@@ -1,0 +1,98 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: hsl(233, 40%, 96%);
+    padding: 25px;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    position: relative;
+}
+.timetable{
+    background: #fff;
+    width: 100%;
+    min-width: 350px;
+    max-width: 450px;
+    height: 708px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+}
+.card{
+    width: 100%;
+    height: 100px;
+    border-bottom: 1px solid #bbb;
+}
+.card:last-child{
+    border-bottom: none;
+}
+.card.today{
+    background: #070740;
+    background: -webkit-linear-gradient(45deg, #0e4781, #070740);
+    background: linear-gradient(45deg, #0e4781, #070740);
+}
+.card.distant.today{
+    background: #470700;
+    background: -webkit-linear-gradient(45deg, #8f6200, #470700);
+    background: linear-gradient(45deg, #8f6200, #470700);
+}
+.card.weekend.today{
+    background: #230425;
+    background: -webkit-linear-gradient(45deg, #400707, #230425);
+    background: linear-gradient(45deg, #400707, #230425);
+}
+.card.weekend .card__day,
+.card.distant .card__day,
+.card__day{
+    color: #fff;
+    background: #000046;
+    background: -webkit-linear-gradient(225deg, #0b4782, #000046);
+    background: linear-gradient(225deg, #0b4782, #000046);
+    width: 84px;
+    height: 84px;
+    margin: 8px;
+    padding-top: 9px;
+    float: left;
+    text-align: center;
+    user-select: none;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+.card.distant .card__day{
+    background: #f12711;
+    background: -webkit-linear-gradient(225deg, #f5af19, #f12711);
+    background: linear-gradient(225deg, #f5af19, #f12711);
+}
+.card.weekend .card__day{
+    background: #200122;
+    background: -webkit-linear-gradient(225deg, #6f0000, #200122);
+    background: linear-gradient(225deg, #6f0000, #200122);
+}
+.card__day h1{
+    font-weight: 700;
+    font-size: 36px;
+}
+.card__day h2{
+    font-weight: 500;
+    font-size: 20px;
+}
+.card__persons{
+    width: calc(100% - 100px);
+    height: 100%;
+    padding: 16px 8px;
+    float: right;
+    box-sizing: border-box;
+}
+.card__persons h1{
+    color: #222;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 33px;
+}
+.card.today h1{
+    color: #fff;
+}
