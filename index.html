@@ -44,6 +44,8 @@
         d.setDate(d.getDate() - d.getDay() + 1);
         let persons_index = date_diff(d, new Date(d.getFullYear(), 0, 0));
 
+        persons_index += 1; //fast tmp change
+
         for(let j = 0; j < distant_days.length; j++){
             let dist_d = new Date(
                 distant_days[j][2],
